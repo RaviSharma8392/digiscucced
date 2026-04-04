@@ -1,0 +1,23 @@
+@import "tailwindcss";
+/* src/index.css */
+/* Import Plus Jakarta Sans for Headings and Inter for Body text */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+/* Set global default to Inter */
+@layer base {
+  html {
+    font-family: "Inter", sans-serif;
+  }
+}
+body {
+  font-family: "Inter", sans-serif;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

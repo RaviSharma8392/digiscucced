@@ -1,0 +1,35 @@
+/* Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Rajdhani:wght@500;600;700&display=swap");
+
+/* Font classes */
+.about-school-serif {
+  font-family: "Libre Baskerville", serif;
+}
+
+.about-school-sans {
+  font-family: "Rajdhani", sans-serif;
+}
+
+/* Red swoosh animation */
+@keyframes about-school-dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.about-school-swoosh-path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: about-school-dash 1.5s ease-out forwards;
+}
+
+/* Dot backgrounds */
+.about-school-dots-green {
+  background-image: radial-gradient(#2ea38d 1.5px, transparent 1.5px);
+  background-size: 12px 12px;
+}
+
+.about-school-dots-red {
+  background-image: radial-gradient(#d35050 1.5px, transparent 1.5px);
+  background-size: 12px 12px;
+}
