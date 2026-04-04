@@ -4,7 +4,7 @@ import SchoolTemplate1Layout from "../layout/SchoolTemplate1Layout.jsx";
 
 import SchoolTemplate1Home from "../pages/SchoolTemplate1Home.jsx";
 import AdmissionsPage from "../pages/AdmissionsPage.jsx";
-import FeeStructurePage from "../pages/FeeStructurePage.jsx";
+// import FeeStructurePage from "../pages/FeeStructurePage.jsx";
 import SchoolTemplate1AboutPage from "../pages/SchoolTemplate1AboutPage.jsx";
 import ContactPage from "../pages/SchoolTemplate1ContactPage.jsx";
 
@@ -20,10 +20,10 @@ export default function SchoolTemplate1Routes({ business }) {
           element={<AdmissionsPage business={business} />}
         />
         <Route path="contact" element={<ContactPage business={business} />} />
-        <Route
+        {/* <Route
           path="fee-structure"
           element={<FeeStructurePage business={business} />}
-        />
+        /> */}
         <Route
           path="about"
           element={<SchoolTemplate1AboutPage business={business} />}
