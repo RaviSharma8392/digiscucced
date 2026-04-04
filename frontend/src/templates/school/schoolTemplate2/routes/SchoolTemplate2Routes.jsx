@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import SchoolTemplate2Layout from "../layout/SchoolTemplate2Layout";
@@ -12,14 +11,13 @@ export default function SchoolTemplate2Routes({ business }) {
   return (
     <Routes>
       <Route element={<SchoolTemplate2Layout business={business} />}>
-        {/* Temporary Home Page */}
         <Route index element={<SchoolTemplate2Home />} />
 
-        {/* Future Pages */}
-        {/* <Route path="admissions" element={<AdmissionsPage business={business} />} /> */}
-        {/* <Route path="contact" element={<ContactPage business={business} />} /> */}
-        {/* <Route path="fee-structure" element={<FeeStructurePage business={business} />} /> */}
-        {/* <Route path="about" element={<SchoolTemplate2AboutPage business={business} />} /> */}
+        {/* Uncomment as pages are built */}
+        {/* <Route path="about"        element={<SchoolTemplate2AboutPage />} /> */}
+        {/* <Route path="admissions"   element={<AdmissionsPage />} /> */}
+        {/* <Route path="contact"      element={<ContactPage />} /> */}
+        {/* <Route path="fee-structure" element={<FeeStructurePage />} /> */}
 
         <Route path="*" element={<NotFound />} />
       </Route>
@@ -27,16 +25,7 @@ export default function SchoolTemplate2Routes({ business }) {
   );
 }
 
-function ComingSoon() {
-  return (
-    <div className="flex items-center justify-center min-h-[60vh] text-center">
-      <div>
-        <h2 className="text-3xl font-bold text-slate-800">Template 2</h2>
-        <p className="mt-2 text-slate-500">Pages coming soon</p>
-      </div>
-    </div>
-  );
-}
+// ─── Shared fallback UI ───────────────────────────────────────
 
 function NotFound() {
   return (
