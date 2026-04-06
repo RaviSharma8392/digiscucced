@@ -140,7 +140,7 @@ export default function SchoolTemplate1Home({ business }) {
         </script>
       </Helmet>
 
-      <NoticeTicker notices={notices} accentColor={theme?.accent} variant={1} />
+      <NoticeTicker notices={notices} accentColor={theme?.accent} variant={2} />
       <SchoolTemplate1HeroSection
         hero={hero}
         school={metaData}

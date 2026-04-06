@@ -4,7 +4,7 @@ export default function SchoolTemplate1HeroSection({
   hero = {},
   affiliation = "",
   colors = {},
-  variant = 2, // Pass 1, 2, or 3 to instantly change the layout
+  variant = 2,
 }) {
   const primary = colors?.primary || "#0f3460";
   const accent = colors?.accent || "#e8a020";
@@ -24,15 +24,12 @@ export default function SchoolTemplate1HeroSection({
     image ||
     "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop";
 
-  // --- REUSABLE MICRO-COMPONENTS ---
-  // To keep the code clean across 3 variants, we define the inner content once.
-
   const Badges = () => (
     <div
       className={`flex flex-wrap items-center gap-3 mb-6 ${variant === 2 ? "justify-center" : ""}`}>
       {badge && (
         <span
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-md"
           style={{ backgroundColor: accent, color: "#1a0a00" }}>
           ✦ {badge}
         </span>
@@ -75,7 +72,7 @@ export default function SchoolTemplate1HeroSection({
       {primaryBtn && (
         <Link
           to={primaryBtn.path}
-          className="group relative inline-flex items-center justify-center text-sm sm:text-base font-bold px-8 py-3.5 rounded-lg overflow-hidden transition-all hover:-translate-y-1 shadow-lg hover:shadow-xl"
+          className="group relative inline-flex items-center justify-center text-sm sm:text-base font-bold px-8 py-3.5 rounded-lg overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl shadow-md"
           style={{ backgroundColor: accent, color: primary }}>
           <span className="relative z-10">{primaryBtn.label}</span>
         </Link>
@@ -91,15 +88,16 @@ export default function SchoolTemplate1HeroSection({
     </div>
   );
 
-  // ==========================================
-  // VARIANT 1: The Modern Split (Angled Cut)
-  // ==========================================
+  // ==========================
+  // VARIANTS
+  // ==========================
+
+  // Variant 1: Angled Split
   if (variant === 1) {
     return (
       <section
         className="relative w-full flex flex-col lg:flex-row overflow-hidden"
         style={{ backgroundColor: primary }}>
-        {/* Subtle Pattern */}
         <div
           className="absolute inset-0 w-full lg:w-1/2 opacity-[0.05] pointer-events-none"
           style={{
@@ -108,8 +106,6 @@ export default function SchoolTemplate1HeroSection({
             backgroundSize: "28px 28px",
           }}
         />
-
-        {/* Content */}
         <div className="relative z-10 w-full lg:w-[55%] px-6 py-16 sm:px-12 lg:px-16 lg:py-28 xl:px-24 flex flex-col justify-center">
           <Badges />
           <Title />
@@ -120,8 +116,6 @@ export default function SchoolTemplate1HeroSection({
           )}
           <Buttons />
         </div>
-
-        {/* Image */}
         <div className="relative w-full lg:absolute lg:right-0 lg:top-0 lg:bottom-0 lg:w-[52%] h-[350px] sm:h-[450px] lg:h-auto">
           <img
             src={heroImage}
@@ -139,29 +133,22 @@ export default function SchoolTemplate1HeroSection({
     );
   }
 
-  // ==========================================
-  // VARIANT 2: The Grand Centered (Classic)
-  // ==========================================
+  // Variant 2: Centered Classic
   if (variant === 2) {
     return (
       <section className="relative w-full min-h-[550px] lg:min-h-[650px] flex items-center justify-center overflow-hidden">
-        {/* Full Background Image */}
         <div className="absolute inset-0">
           <img
             src={heroImage}
             alt="School Campus"
             className="w-full h-full object-cover object-center"
           />
-          {/* Solid Color Overlay using Primary Color */}
           <div
             className="absolute inset-0 opacity-85 mix-blend-multiply"
             style={{ backgroundColor: primary }}
           />
-          {/* Gradient for extra text readability */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
         </div>
-
-        {/* Centered Content */}
         <div className="relative z-10 w-full max-w-5xl px-6 py-20 flex flex-col items-center text-center">
           <Badges />
           <Title />
@@ -176,15 +163,12 @@ export default function SchoolTemplate1HeroSection({
     );
   }
 
-  // ==========================================
-  // VARIANT 3: The Floating Card (Elegant)
-  // ==========================================
+  // Variant 3: Floating Card
   if (variant === 3) {
     return (
       <section
         className="relative w-full min-h-[600px] lg:min-h-[700px] flex items-center overflow-hidden"
         style={{ backgroundColor: primary }}>
-        {/* Image on Right / Full on Mobile */}
         <div className="absolute inset-0 lg:left-[30%]">
           <img
             src={heroImage}
@@ -197,20 +181,15 @@ export default function SchoolTemplate1HeroSection({
               background: `linear-gradient(to right, ${primary} 10%, transparent 100%)`,
             }}
           />
-          {/* Desktop gradient fade */}
           <div
             className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[var(--primary)] to-transparent opacity-90"
             style={{ "--primary": primary }}
           />
         </div>
-
-        {/* Floating Card Content */}
         <div className="relative z-10 w-full max-w-3xl px-6 py-16 lg:px-12 xl:px-20">
           <div
             className="p-8 sm:p-10 lg:p-12 rounded-2xl shadow-2xl backdrop-blur-md border border-white/10"
             style={{ backgroundColor: `${primary}E6` }}>
-            {" "}
-            {/* E6 adds 90% opacity to the hex color */}
             <Badges />
             <Title />
             {description && (

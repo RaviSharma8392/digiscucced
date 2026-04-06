@@ -1,100 +1,75 @@
+import { useMemo, useCallback, useEffect } from "react";
 
+export function useBusinessLayout(business) {
 
-import { useEffect, useState, useMemo, useCallback } from "react";
-import { getBusinessBySlug } from "../services/businessService";
+  const slug = business?.slug || "";
 
-export function useBusinessLayout(slug) {
-  const [business, setBusiness] = useState(null);
-
-  // ── Load manifest once per slug ──────────────────────────────
-  useEffect(() => {
-    if (!slug) return;
-
-    let active = true;
-
-    getBusinessBySlug(slug).then((data) => {
-      if (active && data) setBusiness(data);
-    });
-
-    return () => { active = false; };
-  }, [slug]);
-
-  // ── URL builder ──────────────────────────────────────────────
+  /* ───────── PATH BUILDER ───────── */
   const buildPath = useCallback(
-    (urlPath) => {
-      if (!slug) return "/";
-      const clean = (urlPath || "").replace(/^\/+/, "");
+    (urlPath = "") => {
+      const clean = urlPath.replace(/^\/+/, "");
       return clean ? `/${slug}/${clean}` : `/${slug}`;
     },
     [slug]
   );
 
-  // ── metaData ─────────────────────────────────────────────────
-  const metaData = useMemo(
-    () => ({
-      name:          business?.branding?.name    || "",
-      tagline:       business?.branding?.tagline || "",
-      logoUrlDesk:   business?.branding?.logo    || "",
-      logoUrlMobile: business?.branding?.logo    || "",
-    }),
-    [business]
-  );
+  /* ───────── BRAND / META DATA ───────── */
+  const metaData = useMemo(() => ({
+    name: business?.brand?.name || "",
+    tagline: business?.brand?.tagline || "",
+    logoUrlDesk: business?.brand?.logo || "",
+    logoUrlMobile: business?.brand?.logo || "",
+  }), [business?.brand]);
 
-  // ── topBar ───────────────────────────────────────────────────
-  const topBar = useMemo(
-    () => ({
-      ...business?.topBar,
-      phone:       business?.contact?.phone       || "",
-      enquiryText: business?.contact?.enquiryText || "",
-    }),
-    [business]
-  );
+  /* ───────── TOP BAR ───────── */
+  const topBar = useMemo(() => ({
+    ...business?.topBar,
+    phone: business?.contact?.phone || "",
+    enquiryText: business?.contact?.enquiryText || "",
+  }), [business?.topBar, business?.contact]);
 
-  // ── navLinks ─────────────────────────────────────────────────
-  const navLinks = useMemo(
-    () =>
-      (business?.navigation || []).map((link) => ({
-        label:    link.label,
-        icon:     link.icon,
-        badge:    link.badge,
-        path:     buildPath(link.path || ""),
-        subLinks: (link.children || []).map((sub) => ({
-          label: sub.label,
-          path:  buildPath(sub.path || ""),
-        })),
-      })),
-    [business, buildPath]
-  );
+  /* ───────── NAVIGATION ───────── */
+  const navLinks = useMemo(() =>
+    (business?.nav || []).map(link => ({
+      label: link.label,
+      icon: link.icon,
+      badge: link.badge,
+      path: buildPath(link.path),
 
-  // ── theme ────────────────────────────────────────────────────
-  const theme = useMemo(
-    () => ({
-      name:    metaData.name    || "Business Name",
-      tagline: metaData.tagline || "",
-      ...business?.theme,
-    }),
-    [business, metaData.name, metaData.tagline]
-  );
+      subLinks: (link.subLinks || link.children || []).map(sub => ({
+        label: sub.label,
+        path: buildPath(sub.path),
+      }))
+    }))
+  , [business?.nav, buildPath]);
 
-  // ── faviconUrl ───────────────────────────────────────────────
+  /* ───────── THEME ───────── */
+  const theme = useMemo(() => ({
+    name: metaData.name || "Business",
+    tagline: metaData.tagline || "",
+    ...business?.theme,
+  }), [business?.theme, metaData]);
+
+  /* ───────── FAVICON ───────── */
   const faviconUrl =
-    metaData.logoUrlMobile || metaData.logoUrlDesk || "/favicon.ico";
+    metaData.logoUrlMobile ||
+    metaData.logoUrlDesk ||
+    "/favicon.ico";
 
-  // ── Dynamic favicon per tenant ───────────────────────────────
   useEffect(() => {
-    if (!business) return;
+    if (!faviconUrl) return;
 
-    document.querySelectorAll("link[rel~='icon']").forEach((el) => el.remove());
+    document.querySelectorAll("link[rel~='icon']").forEach(el => el.remove());
 
     const link = document.createElement("link");
-    link.rel  = "icon";
-    link.type = "image/png";
+    link.rel = "icon";
     link.href = `${faviconUrl}?v=${slug}`;
+
     document.head.appendChild(link);
-  }, [faviconUrl, slug, business]);
+
+  }, [faviconUrl, slug]);
 
   return {
-    business,
     metaData,
     topBar,
     navLinks,
@@ -102,3 +77,4 @@ export function useBusinessLayout(slug) {
     faviconUrl,
   };
 }
+

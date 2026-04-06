@@ -8,23 +8,39 @@ export async function getBusinessBySlug(slug) {
     return null;
   }
 
-  const normalizedSlug = slug.trim().toLowerCase(); // ← must be declared FIRST
+  const normalizedSlug = slug.trim().toLowerCase();
 
-  if (_cache.has(normalizedSlug)) return _cache.get(normalizedSlug);
+  // Return cached promise/result
+  if (_cache.has(normalizedSlug)) {
+    return _cache.get(normalizedSlug);
+  }
 
-  if (!(normalizedSlug in manifestRegistry)) {
+  if (!Object.hasOwn(manifestRegistry, normalizedSlug)) {
     console.warn(`[getBusinessBySlug] No manifest registered for: "${normalizedSlug}"`);
     return null;
   }
 
   try {
-    const manifest = await loadManifest(normalizedSlug);
-    if (manifest.slug !== normalizedSlug) {
-      console.error(`[getBusinessBySlug] Slug mismatch: key="${normalizedSlug}" manifest.slug="${manifest.slug}"`);
-      return null;
-    }
-    _cache.set(normalizedSlug, manifest);
-    return manifest;
+    const promise = loadManifest(normalizedSlug).then((manifest) => {
+      if (!manifest) return null;
+
+      if (manifest.slug !== normalizedSlug) {
+        console.error(
+          `[getBusinessBySlug] Slug mismatch: key="${normalizedSlug}" manifest.slug="${manifest.slug}"`
+        );
+        return null;
+      }
+
+      // Optional safety
+      Object.freeze(manifest);
+
+      return manifest;
+    });
+
+    _cache.set(normalizedSlug, promise);
+
+    return await promise;
+
   } catch (err) {
     console.error(`[getBusinessBySlug] Failed to load "${normalizedSlug}":`, err);
     return null;
@@ -37,7 +53,8 @@ export function getAllSlugs() {
 
 export function isValidSlug(slug) {
   if (!slug || typeof slug !== "string") return false;
-  return slug.trim().toLowerCase() in manifestRegistry;
+  const normalized = slug.trim().toLowerCase();
+  return Object.hasOwn(manifestRegistry, normalized);
 }
 
 export async function getAllManifests() {

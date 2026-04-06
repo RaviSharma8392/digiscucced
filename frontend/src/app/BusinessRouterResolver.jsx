@@ -1,10 +1,8 @@
 /**
  * BusinessRouterResolver.jsx
  *
- * Resolves a URL slug → manifest → template component.
- * This is the single entry point for all tenant routes.
- *
- * Route shape expected:  /:businessSlug/*
+ * Resolves:  /:businessSlug/*
+ * Loads tenant config → resolves template → renders template router
  */
 
 import { useParams } from "react-router-dom";
@@ -21,58 +19,61 @@ export default function BusinessRouterResolver() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Guard: nothing to load if slug is missing
     if (!businessSlug) {
-      setError("No business slug in URL.");
+      setError("Missing business slug.");
       setLoading(false);
       return;
     }
 
-    let active = true;
+    const controller = new AbortController();
 
     async function loadBusiness() {
-      setLoading(true);
-      setError(null);
-
       try {
-        const data = await getBusinessBySlug(businessSlug);
-        if (!active) return;
+        setLoading(true);
+        setError(null);
+        setBusiness(null);
+
+        const data = await getBusinessBySlug(businessSlug, {
+          signal: controller.signal,
+        });
 
         if (!data) {
-          setError(`No business found for "${businessSlug}".`);
-        } else {
-          setBusiness(data);
+          throw new Error(`No business found for "${businessSlug}"`);
         }
+
+        setBusiness(data);
       } catch (err) {
-        if (active) setError("Failed to load business. Please try again.");
-        console.error("[BusinessRouterResolver]", err);
+        if (err.name !== "AbortError") {
+          console.error("[BusinessRouterResolver]", err);
+          setError(err.message || "Unable to load business.");
+        }
       } finally {
-        if (active) setLoading(false);
+        setLoading(false);
       }
     }
 
     loadBusiness();
 
-    return () => {
-      active = false;
-    };
-  }, [businessSlug]); // re-runs if slug changes (browser back/forward)
+    return () => controller.abort();
+  }, [businessSlug]);
 
-  // ── States ───────────────────────────────────────────────────
+  // ─── Loading state ─────────────────────────────
   if (loading) return <FullPageSpinner />;
+
+  // ─── Error state ───────────────────────────────
   if (error) return <FullPageError message={error} />;
 
-  // ── Template resolution ──────────────────────────────────────
-  const TemplateRouter = templateRegistry[business.template];
+  // ─── Template resolution ───────────────────────
+  const templateKey = business?.template;
+  const TemplateRouter = templateRegistry[templateKey];
 
   if (!TemplateRouter) {
     return (
-      <FullPageError
-        message={`Template "${business.template}" is not registered. Contact support.`}
-      />
+      <FullPageError message={`Template "${templateKey}" is not registered.`} />
     );
   }
 
+  // ─── Render tenant template ────────────────────
   return (
     <Suspense fallback={<FullPageSpinner />}>
       <TemplateRouter business={business} />
@@ -80,23 +81,24 @@ export default function BusinessRouterResolver() {
   );
 }
 
-// ─── Internal UI primitives ───────────────────────────────────
-// Keep these co-located — they're only used by this component.
-// Replace with your design system equivalents when ready.
+/* ─────────────────────────────────────────────
+   Internal UI Components
+   Replace with your design system later
+───────────────────────────────────────────── */
 
 function FullPageSpinner() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f8fafc]">
-      <div className="w-8 h-8 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin" />
+    <div className="min-h-screen flex items-center justify-center bg-slate-50">
+      <div className="w-10 h-10 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin" />
     </div>
   );
 }
 
 function FullPageError({ message }) {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[#f8fafc] text-gray-600 gap-2">
-      <p className="text-lg font-medium">Something went wrong</p>
-      <p className="text-sm text-gray-400">{message}</p>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 text-gray-700 gap-2 px-6 text-center">
+      <h2 className="text-xl font-semibold">Something went wrong</h2>
+      <p className="text-sm text-gray-500">{message}</p>
     </div>
   );
 }

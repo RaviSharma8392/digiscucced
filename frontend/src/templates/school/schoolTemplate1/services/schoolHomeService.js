@@ -1,50 +1,13 @@
 // ─────────────────────────────────────────────────────────────
-//  SCHOOL REGISTRY
-//  Each key is the school's unique slug used in the URL.
-//  To add a new school: copy any entry, change the slug key,
-//  and fill in its data. The rest of the system picks it up
-//  automatically — no other file needs to change.
+//  SCHOOL HOME SERVICE
+//  Provides school data by slug with caching and global config merge
 // ─────────────────────────────────────────────────────────────
 
-import { schoolConfig } from '../config/schoolConfig.js';
+import { schoolConfig } from "../config/schoolConfig.js";
 
 const schoolRegistry = {
-
-  // ── 1. Sunrise Public School ─────────────────────────────────
-  "sunrise": {
-    school: {
-      name: "Sunrise Public School",
-      city: "Moradabad",
-      tagline: "Shaping Tomorrow's Leaders Today",
-      established: 1995,
-      affiliation: "CBSE",
-      logo: "https://www.theasianschool.net/blog/wp-content/uploads/2025/04/The-Asian-school-LOGO11zon-1.png",
-      contact: {
-        phone: "+91-9876543210",
-        email: "info@sunriseschool.edu.in",
-        address: "123 Civil Lines, Moradabad, UP – 244001",
-        hours: "Mon–Sat: 8:00 AM – 3:30 PM",
-      },
-    },
-
-    theme: {
-      primary: "#0f3460",
-      accent: "#e8a020",
-      background: "#ffffff",
-      text: "#1e293b",
-    },
-
-    navigation: {
-      links: [
-        { label: "Home", path: "/school" },
-        { label: "About", path: "/school/about" },
-        { label: "Admissions", path: "/school/admissions" },
-        { label: "Academics", path: "/school/academics" },
-        { label: "Contact", path: "/contact" },
-      ],
-      cta: { label: "Apply Now", link: "/admissions" },
-    },
-
+  // ── 1. Sunrise Public School ────────────────────────────────
+  "si-succeed-computer-institute": {
     notices: [
       "Annual Sports Day on 28 March 2026",
       "Result of Class X & XII Board Exams declared — 100% Pass Rate",
@@ -187,7 +150,6 @@ const schoolRegistry = {
   // ── 2. RIC Nakuchiyatal ───────────────────────────────────────
   "ric-nakuchiyatal": {
     school: {
-      
       name: "Rajkiya Inter College, Nakuchiyatal",
       city: "Nakuchiyatal",
       tagline: "Gyan Ki Roshni, Pahad Ki Shakti",
@@ -394,41 +356,26 @@ const schoolRegistry = {
       secondaryBtn: { label: "Visit Us", path: "/contact" },
     },
   },
-
-  // ── 3. Add your next school below ────────────────────────────
-  //
-  // "your-school-slug": {
-  //   school: { name: "", city: "", tagline: "", ... },
-  //   theme: { primary: "", accent: "", ... },
-  //   navigation: { ... },
-  //   notices: [],
-  //   hero: { ... },
-  //   stats: [],
-  //   about: { ... },
-  //   programs: [],
-  //   events: [],
-  //   principal: { ... },
-  //   gallery: { ... },
-  //   admissionCTA: { ... },
-  // },
 };
 
-
 // ─────────────────────────────────────────────────────────────
-//  CACHE LAYER  —  no changes needed below this line
+//  CACHE LAYER — no changes needed below this line
 // ─────────────────────────────────────────────────────────────
 
 const cache = new Map();
 
 export async function getSchoolHomeData(slug) {
+  if (!slug) throw new Error("Missing school slug");
+
   if (cache.has(slug)) return cache.get(slug);
 
   const registryConfig = schoolRegistry[slug];
 
   if (!registryConfig) {
     throw new Error(
-      `School not found: "${slug}". ` +
-      `Available slugs: [${Object.keys(schoolRegistry).join(", ")}]`
+      `School not found: "${slug}". Available slugs: [${Object.keys(
+        schoolRegistry,
+      ).join(", ")}]`,
     );
   }
 
@@ -437,7 +384,6 @@ export async function getSchoolHomeData(slug) {
   return config;
 }
 
-// Utility — get all registered slugs (useful for sitemap / admin panel)
 export function getAllSchoolSlugs() {
   return Object.keys(schoolRegistry);
 }

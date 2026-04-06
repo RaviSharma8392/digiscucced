@@ -1,35 +1,57 @@
 /**
  * manifests/index.js
- * Central registry — maps every slug to a lazy import.
- * Add new clients here only. Nothing else changes.
+ * Central registry for all tenant manifests.
  */
 
 export const manifestRegistry = {
-  "vidyamandir":                    () => import("./vidyamandir.js"),
-  // "sunrise-public-school":          () => import("./sunrise-public-school.js"),
-  "si-succeed-computer-institute":  () => import("./si-succeed-computer-institute.js"),
-  // "ric-nakuchiyatal":               () => import("./ric-nakuchiyatal.js"),
-  "gic-nakuchiyatal":               () => import("./gic-nakuchiyatal.js"),
+  "vidyamandir": () => import("./vidyamandir.js"),
+  // "sunrise-public-school": () => import("./sunrise-public-school.js"),
+  "si-succeed-computer-institute": () =>
+    import("./si-succeed-computer-institute.js"),
+  // "ric-nakuchiyatal": () => import("./ric-nakuchiyatal.js"),
+  "gic-nakuchiyatal": () => import("./gic-nakuchiyatal.js"),
 };
 
-/**
- * loadManifest(slug)
- * Dynamically loads only the requested client's config.
- * Used by useBusinessLayout hook.
- */
+const manifestCache = new Map();
+
 export async function loadManifest(slug) {
-  const loader = manifestRegistry[slug];
+  if (!slug || typeof slug !== "string") {
+    throw new Error(`[Nexaric] Invalid slug: "${slug}"`);
+  }
+
+  const normalizedSlug = slug.trim().toLowerCase();
+
+  // return cached manifest
+  if (manifestCache.has(normalizedSlug)) {
+    return manifestCache.get(normalizedSlug);
+  }
+
+  const loader = manifestRegistry[normalizedSlug];
 
   if (!loader) {
-    throw new Error(`[Nexaric] No manifest registered for slug: "${slug}"`);
+    throw new Error(
+      `[Nexaric] No manifest registered for slug: "${normalizedSlug}"`
+    );
   }
 
   const mod = await loader();
 
-  // Guard: ensure the file actually has a default export
   if (!mod?.default) {
-    throw new Error(`[Nexaric] Manifest for "${slug}" has no default export.`);
+    throw new Error(
+      `[Nexaric] Manifest for "${normalizedSlug}" has no default export.`
+    );
   }
 
-  return mod.default;
+  const manifest = mod.default;
+
+  // Optional validation
+  if (!manifest.slug || !manifest.template) {
+    throw new Error(
+      `[Nexaric] Invalid manifest structure for "${normalizedSlug}".`
+    );
+  }
+
+  manifestCache.set(normalizedSlug, manifest);
+
+  return manifest;
 }
