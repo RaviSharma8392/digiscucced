@@ -1,170 +1,248 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {
+  GlobeAltIcon,
+  BoltIcon,
+  BriefcaseIcon,
+} from "@heroicons/react/24/outline";
+import siteConfig from "../siteConfig";
 
 const Footer = () => {
+  const { brand, contact, social } = siteConfig;
+
+  // Custom SVG Components to match Heroicon's clean aesthetic
+  const InstagramIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+
+  const YoutubeIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 2-2 69.44 69.44 0 0 1 15 0 2 2 0 0 1 2 2 24.12 24.12 0 0 1 0 10 2 2 0 0 1-2 2 69.44 69.44 0 0 1-15 0 2 2 0 0 1-2-2Z" />
+      <path d="m10 15 5-3-5-3z" />
+    </svg>
+  );
+
+  const XIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path d="M4 4l11.733 16H20L8.267 4z" />
+      <path d="M4 20l6.768-6.768m2.46-2.46L20 4" />
+    </svg>
+  );
+
+  const LinkedinIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect width="4" height="12" x="2" y="9" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+
+  const FacebookIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+
   return (
-    <footer className="bg-black text-white w-full border-t border-white/10 font-sans pt-24 pb-8 px-6 sm:px-8 lg:px-12">
-      <div className="max-w-7xl mx-auto">
-        {/* Top Section */}
-        <div className="flex flex-col lg:flex-row justify-between gap-16 mb-24">
-          {/* Brand */}
-          <div className="max-w-md">
-            <Link to="/" className="inline-block mb-8">
-              <span className="text-5xl font-light tracking-tighter">
-                ds<span className="font-bold">&gt;</span>
+    <footer className="bg-black text-gray-300 font-[Inter]">
+      <div className=" mx-auto px-6 lg:px-12 py-16">
+        {/* TOP */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-b border-gray-800 pb-12">
+          {/* LEFT */}
+          <div>
+            <h2 className="text-2xl font-bold text-white mb-3">{brand}</h2>
+            <p className="text-gray-400 mb-6">
+              We build websites, manage Google presence, and grow your business
+              online
+            </p>
+
+            <div className="flex flex-wrap gap-6 text-sm text-gray-400">
+              <span className="flex items-center gap-2">
+                <GlobeAltIcon className="w-5 h-5 text-orange-500" /> Serving
+                Worldwide
               </span>
-            </Link>
-
-            <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8">
-              DigiSucceed helps local businesses grow using modern digital
-              tools. From website development to online promotion, we help
-              shops, startups, and small businesses attract more customers and
-              increase sales.
-            </p>
-
-            <div className="flex gap-6">
-              {["Instagram", "LinkedIn", "WhatsApp"].map((social) => (
-                <a
-                  key={social}
-                  href="#"
-                  className="text-xs uppercase tracking-widest text-gray-500 hover:text-white transition">
-                  {social}
-                </a>
-              ))}
+              <span className="flex items-center gap-2">
+                <BoltIcon className="w-5 h-5 text-orange-500" /> Fast Delivery
+              </span>
+              <span className="flex items-center gap-2">
+                <BriefcaseIcon className="w-5 h-5 text-orange-500" /> Business
+                Growth
+              </span>
             </div>
           </div>
 
-          {/* Newsletter */}
-          <div className="lg:max-w-md w-full">
-            <h4 className="text-sm font-bold uppercase tracking-widest mb-4">
-              Get Business Tips
-            </h4>
+          {/* RIGHT */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div>
+              <h4 className="text-white font-semibold mb-3">Contact</h4>
+              <p className="text-sm">{contact.email}</p>
+              <p className="text-sm mt-2">{contact.phone}</p>
+              <p className="text-sm mt-2 text-gray-400">
+                {contact.availability}
+              </p>
+            </div>
 
-            <p className="text-gray-400 text-sm mb-6">
-              Subscribe to receive digital marketing tips and website ideas to
-              help your business grow online.
-            </p>
-
-            <form className="flex flex-col sm:flex-row gap-2">
-              <input
-                type="email"
-                placeholder="Your Email Address"
-                className="w-full bg-transparent border border-white/20 px-6 py-4 text-sm text-white focus:outline-none focus:border-white placeholder-gray-500"
-              />
-
-              <button
-                type="submit"
-                className="bg-white text-black px-8 py-4 text-xs font-bold uppercase tracking-wider hover:bg-gray-200 transition">
-                Subscribe
+            <div>
+              <h4 className="text-white font-semibold mb-3">Quick Action</h4>
+              <p className="text-sm text-gray-400">
+                Start your project today and grow your business online.
+              </p>
+              <button className="mt-4 bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-full text-sm font-semibold transition">
+                Start Project
               </button>
-            </form>
-          </div>
-        </div>
-
-        {/* Links Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 border-t border-white/10 pt-16 mb-24">
-          {/* Services */}
-          <div className="flex flex-col gap-4">
-            <h5 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
-              Services
-            </h5>
-
-            {[
-              "Website Development",
-              "Banner Design",
-              "Social Media Setup",
-              "Digital Marketing",
-            ].map((item) => (
-              <Link
-                key={item}
-                to="/services"
-                className="text-sm text-gray-300 hover:text-white transition">
-                {item}
-              </Link>
-            ))}
-          </div>
-
-          {/* Company */}
-          <div className="flex flex-col gap-4">
-            <h5 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
-              Company
-            </h5>
-
-            {["About Us", "Our Work", "Blog", "Contact"].map((item) => (
-              <Link
-                key={item}
-                to={`/${item.toLowerCase().replace(/ /g, "-")}`}
-                className="text-sm text-gray-300 hover:text-white transition">
-                {item}
-              </Link>
-            ))}
-          </div>
-
-          {/* Resources */}
-          <div className="flex flex-col gap-4">
-            <h5 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
-              Resources
-            </h5>
-
-            {[
-              "Marketing Tips",
-              "Website Guides",
-              "Business Growth",
-              "Case Studies",
-            ].map((item) => (
-              <Link
-                key={item}
-                to="/blog"
-                className="text-sm text-gray-300 hover:text-white transition">
-                {item}
-              </Link>
-            ))}
-          </div>
-
-          {/* Location */}
-          <div className="flex flex-col gap-4">
-            <h5 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
-              Location
-            </h5>
-
-            <div className="text-sm text-gray-400 leading-relaxed">
-              <p className="text-white font-medium mb-1">
-                DigiSucceed Services
-              </p>
-
-              <p>
-                Nainital, Uttarakhand
-                <br />
-                India
-              </p>
             </div>
-
-            <Link
-              to="/contact"
-              className="text-xs uppercase tracking-wider text-white hover:text-gray-300 transition mt-2">
-              Contact Us →
-            </Link>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 border-t border-white/10 pt-8">
-          <div className="text-xs text-gray-500">
-            © {new Date().getFullYear()} DigiSucceed Services. All rights
-            reserved.
+        {/* SOCIAL */}
+        <div className="flex items-center justify-between flex-wrap gap-4 py-6 border-b border-gray-800">
+          <h4 className="text-white font-medium">Follow Us</h4>
+          <div className="flex gap-5 items-center">
+            <a
+              href={social.youtube}
+              className="hover:text-orange-500 transition-colors">
+              <YoutubeIcon />
+            </a>
+            <a
+              href={social.twitter}
+              className="hover:text-orange-500 transition-colors">
+              <XIcon />
+            </a>
+            <a
+              href={social.linkedin}
+              className="hover:text-orange-500 transition-colors">
+              <LinkedinIcon />
+            </a>
+            <a
+              href={social.instagram}
+              className="hover:text-orange-500 transition-colors">
+              <InstagramIcon />
+            </a>
+            <a
+              href={social.facebook}
+              className="hover:text-orange-500 transition-colors">
+              <FacebookIcon />
+            </a>
+          </div>
+        </div>
+
+        {/* LINKS */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 py-12">
+          <div>
+            <h4 className="text-white font-semibold mb-4">Services</h4>
+            <ul className="space-y-2 text-sm">
+              <li className="hover:text-orange-500 cursor-pointer transition">
+                Website Development
+              </li>
+              <li className="hover:text-orange-500 cursor-pointer transition">
+                Google Business Setup
+              </li>
+              <li className="hover:text-orange-500 cursor-pointer transition">
+                Social Media Marketing
+              </li>
+              <li className="hover:text-orange-500 cursor-pointer transition">
+                Paid Ads Management
+              </li>
+            </ul>
           </div>
 
-          <div className="flex gap-6 text-xs text-gray-500">
-            <a href="#" className="hover:text-white">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-white">
-              Terms
-            </a>
-            <a href="#" className="hover:text-white">
-              Cookies
-            </a>
+          <div>
+            <h4 className="text-white font-semibold mb-4">Growth</h4>
+            <ul className="space-y-2 text-sm">
+              <li className="hover:text-orange-500 cursor-pointer transition">
+                Local SEO
+              </li>
+              <li className="hover:text-orange-500 cursor-pointer transition">
+                Lead Generation
+              </li>
+              <li className="hover:text-orange-500 cursor-pointer transition">
+                Brand Building
+              </li>
+            </ul>
           </div>
+
+          <div>
+            <h4 className="text-white font-semibold mb-4">Company</h4>
+            <ul className="space-y-2 text-sm">
+              <li className="hover:text-orange-500 cursor-pointer transition">
+                About Us
+              </li>
+              <li className="hover:text-orange-500 cursor-pointer transition">
+                Contact
+              </li>
+              <li className="hover:text-orange-500 cursor-pointer transition">
+                Portfolio
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white font-semibold mb-4">Resources</h4>
+            <ul className="space-y-2 text-sm">
+              <li className="hover:text-orange-500 cursor-pointer transition">
+                Blog
+              </li>
+              <li className="hover:text-orange-500 cursor-pointer transition">
+                Case Studies
+              </li>
+              <li className="hover:text-orange-500 cursor-pointer transition">
+                Free Tools
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* BOTTOM */}
+        <div className="text-center text-sm text-gray-500 border-t border-gray-800 pt-6">
+          © {new Date().getFullYear()} {brand}. All rights reserved.
         </div>
       </div>
     </footer>

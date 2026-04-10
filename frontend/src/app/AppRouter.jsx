@@ -1,6 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import SystemLayout from "../layouts/SystemLayout";
+import AboutPage from "./system/pages/AboutPage";
+import ContactPage from "./system/pages/ContactPage";
+import GenZContactPage from "./system/pages/ContactPage";
+import Home from "../system/pages/Home";
 
 // --- Lazy-loaded pages ---
 const HomePage = lazy(() => import("../system/pages/HomePages"));
@@ -33,10 +37,12 @@ export default function AppRouter() {
           <Route index element={<HomePage />} />
           <Route path="services" element={<ServicesPage />} />
         </Route>
+        <Route path="/who-we-are" element={<Home />} />
 
         {/* Homestay template */}
         <Route path="homestay" element={<HomeStayHomePage />} />
         <Route path="rooms" element={<Rooms />} />
+        <Route path="contact-us" element={<ContactPage />} />
       </Routes>
     </Suspense>
   );

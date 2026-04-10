@@ -1,0 +1,54 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Cormorant+Garamond:wght@600;700&display=swap");
+
+.tmx-wrap {
+  font-family: "DM Sans", sans-serif;
+}
+
+/* Heading */
+.tmx-heading {
+  font-family: "Cormorant Garamond", serif;
+}
+
+/* Card */
+.tmx-card {
+  border: 1px solid rgba(240, 237, 232, 0.08);
+  transition: all 0.3s ease;
+}
+
+.tmx-card:hover {
+  border-color: rgba(226, 78, 51, 0.22);
+  background: rgba(226, 78, 51, 0.03);
+}
+
+/* Top border animation */
+.tmx-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, #e24e33, #f5a623);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.tmx-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Metric badge */
+.tmx-metric {
+  background: rgba(226, 78, 51, 0.1);
+  border: 1px solid rgba(226, 78, 51, 0.25);
+  color: #e24e33;
+}
+
+/* Progress bar */
+.tmx-progress {
+  height: 2px;
+  background: #e24e33;
+  transition: width 0.4s ease;
+}

@@ -1,39 +1,54 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const HeroSection = ({
-  title = "The new way to create a website",
-  subtitle = "Go from words to a business-ready site that's entirely yours to shape, on the first hybrid website builder.",
-  primaryText = "Get Started",
-  primaryLink = "/builder",
-  subText = "Start for free. No credit card required.",
-}) => {
+const HeroSection = () => {
   return (
-    <section className="relative w-full pt-20 flex flex-col items-center overflow-hidden bg-gradient-to-b from-slate-50 to-[#f0f4f8] font-sans">
-      {/* Background ambient glow matching the image */}
-      <div className="absolute top-0 left-[-10%] w-[40%] h-[40%] rounded-full bg-pink-100/40 blur-[100px] z-0 pointer-events-none"></div>
-      <div className="absolute top-0 right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-200/40 blur-[100px] z-0 pointer-events-none"></div>
+    <section className="relative w-full h-[90vh] flex items-center text-white overflow-hidden">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/tech-bg.jpg')", // replace with your image
+        }}
+      />
 
-      {/* --- Top Text & CTA Section --- */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-6 flex flex-col items-center text-center mt-12 mb-16">
-        {/* Title */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-semibold text-slate-900 tracking-tight leading-[1.1] mb-6">
-          {title}
-        </h1>
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/80" />
 
-        {/* Subtitle */}
-        <p className="text-slate-600 text-lg md:text-xl leading-relaxed max-w-2xl mb-8">
-          {subtitle}
+      {/* Content */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        {/* Small Tag */}
+        <p className="text-orange-400 text-sm tracking-widest uppercase mb-4">
+          Web Designing Company in India
         </p>
 
-        {/* CTA Button & Subtext */}
-        <div className="flex flex-col items-center gap-3">
+        {/* Main Heading */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-semibold leading-tight mb-6">
+          Where Innovation Meets Imagination
+        </h1>
+
+        {/* Description */}
+        <p className="text-gray-300 max-w-2xl text-sm sm:text-base md:text-lg mb-8">
+          We deliver smart, scalable web & marketing solutions that help your
+          business grow online. From websites to Google Business management — we
+          handle everything.
+        </p>
+
+        {/* Buttons */}
+        <div className="flex flex-wrap gap-4">
+          {/* Primary Button */}
           <Link
-            to={primaryLink}
-            className="px-10 py-4 bg-[#1a65f8] hover:bg-[#1554d4] text-white text-lg font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
-            {primaryText}
+            to="/services"
+            className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-md text-sm sm:text-base font-medium transition">
+            Our Services
           </Link>
-          <span className="text-slate-500 text-sm">{subText}</span>
+
+          {/* Secondary Button */}
+          <Link
+            to="/contact"
+            className="border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-black px-6 py-3 rounded-md text-sm sm:text-base font-medium transition">
+            Talk To Experts
+          </Link>
         </div>
       </div>
     </section>

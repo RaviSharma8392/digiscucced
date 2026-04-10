@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// --- DYNAMIC DATA ---
 const latestBlogs = [
   {
     id: 1,
@@ -34,80 +33,70 @@ const latestBlogs = [
 
 const LatestBlogs = () => {
   return (
-    <section className="bg-black w-full py-20 px-6 sm:px-8 lg:px-12 font-sans border-t border-white/10">
+    <section className="bg-[#f5f5f5] w-full py-20 px-6 sm:px-8 lg:px-12 font-sans">
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-12 gap-6">
-          <div>
-            <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-normal text-white tracking-tight">
-              Latest insights.
-            </h2>
-            <div className="w-12 h-1 bg-white mt-6"></div>
-          </div>
+        {/* Top Label */}
+        <p className="text-sm tracking-widest uppercase text-blue-600 mb-4">
+          Web Design & App Development Blogs
+        </p>
 
+        {/* Heading */}
+        <h2 className="text-4xl md:text-5xl font-serif text-black mb-6 leading-tight">
+          Insights, Trends & Digital Strategies
+        </h2>
+
+        {/* Subtext */}
+        <p className="text-gray-600 max-w-2xl mb-12">
+          Read our blogs on web, app, and tech strategy — written by experts to
+          help global brands innovate, grow, and lead in a digital-first world.
+        </p>
+
+        {/* Top Right Link */}
+        <div className="flex justify-end mb-8">
           <Link
             to="/blog"
-            className="group flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] text-white hover:text-gray-400 transition-colors">
-            View all articles
-            <svg
-              className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2.5"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
+            className="flex items-center gap-2 text-sm font-semibold text-black hover:text-blue-600 transition">
+            View all articles →
           </Link>
         </div>
 
-        {/* Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6">
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {latestBlogs.map((blog) => (
             <Link
               key={blog.id}
               to={blog.link}
-              className="group flex flex-col bg-[#0a0a0a] border border-white/5 hover:border-white/20 transition-colors duration-300">
-              {/* Image Container with Zoom Effect */}
+              className="group bg-white overflow-hidden shadow-sm hover:shadow-lg transition duration-300 border border-gray-200">
+              {/* Image */}
               <div className="relative w-full h-56 overflow-hidden">
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
                 <img
                   src={blog.image}
                   alt={blog.title}
-                  className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
 
-              {/* Text Content Container */}
-              <div className="flex flex-col flex-grow p-6 sm:p-8">
-                {/* Meta Data (Category & Date) */}
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-gray-400">
+              {/* Content */}
+              <div className="p-6 flex flex-col h-full">
+                {/* Meta */}
+                <div className="flex justify-between text-xs text-gray-500 mb-3">
+                  <span className="uppercase tracking-wider text-blue-600 font-semibold">
                     {blog.category}
                   </span>
-                  <span className="text-[10px] tracking-wider text-gray-500">
-                    {blog.date}
-                  </span>
+                  <span>{blog.date}</span>
                 </div>
 
-                {/* Article Title */}
-                <h3 className="text-xl md:text-2xl font-bold text-white leading-[1.2] tracking-tight mb-6 group-hover:text-gray-300 transition-colors">
+                {/* Title */}
+                <h3 className="text-lg font-semibold text-black mb-4 group-hover:text-blue-600 transition">
                   {blog.title}
                 </h3>
 
-                {/* Push link to bottom */}
                 <div className="flex-grow" />
 
-                {/* Read More Link */}
-                <div className="flex items-center gap-2 text-sm font-bold text-white">
-                  Read article
-                  <span className="text-xl font-light leading-none transform group-hover:translate-x-1 transition-transform">
-                    &gt;
-                  </span>
-                </div>
+                {/* Read */}
+                <span className="text-sm font-medium text-black group-hover:text-blue-600 transition">
+                  Read article →
+                </span>
               </div>
             </Link>
           ))}

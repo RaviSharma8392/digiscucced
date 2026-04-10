@@ -7,6 +7,9 @@ import ClientsSection from "../components/section/ClientsSection";
 import LatestBlogs from "../components/section/LatestBlogs";
 import Pricing from "../components/section/Pricing";
 import HeroSection from "../components/section/Hero";
+import ContactBanner from "../components/section/ContactBanner";
+import ProcessSection from "../components/section/ProcessSection";
+import FAQSection from "../components/section/FAQSection";
 
 const steps = [
   {
@@ -45,169 +48,20 @@ export default function HomePage() {
 
       {/* Services */}
       <ServicesSection />
-
-      {/* Process Section - AGENCY STYLE LIGHT THEME */}
-      <section className="py-32 px-6 lg:px-12 bg-[#f8fafc] text-slate-900 border-t border-slate-200">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-            <div className="max-w-2xl">
-              <span className="flex items-center gap-4 text-blue-600 font-semibold tracking-widest uppercase text-sm mb-4">
-                <span className="w-8 h-[2px] bg-blue-600"></span>
-                Our Methodology
-              </span>
-              <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
-                A proven framework for digital success.
-              </h3>
-            </div>
-            <p className="text-slate-500 text-lg max-w-md pb-2">
-              We eliminate guesswork. Our systematic approach ensures every
-              project is delivered on time, on budget, and primed for growth.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-            {steps.map((step, index) => (
-              <div
-                key={step.id}
-                className="group relative bg-white p-10 border border-slate-200 hover:border-blue-600 hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-500 flex flex-col h-full">
-                {/* Thin, elegant background number */}
-                <span className="absolute top-6 right-8 text-7xl font-extralight text-slate-100 transition-colors duration-500 group-hover:text-blue-50">
-                  0{index + 1}
-                </span>
-
-                <div className="relative z-10 mt-auto pt-24">
-                  <h4 className="text-2xl font-bold mb-4 text-slate-900 group-hover:text-blue-600 transition-colors duration-300">
-                    {step.title}
-                  </h4>
-                  <p className="text-slate-600 leading-relaxed text-base">
-                    {step.description}
-                  </p>
-                </div>
-
-                {/* Animated bottom line */}
-                <div className="absolute bottom-0 left-0 h-1 w-0 bg-blue-600 transition-all duration-500 group-hover:w-full"></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <Pricing />
+      <ProcessSection />
+      <ContactBanner />
 
       {/* Clients */}
-      <ClientsSection />
+      {/* <ClientsSection /> */}
 
       {/* Reviews */}
-      <ReviewsSection />
+      {/* <ReviewsSection /> */}
 
       {/* Blogs */}
       <LatestBlogs />
 
-      {/* Mission Section - CORPORATE SPLIT LAYOUT */}
-      <section className="px-6 py-32 lg:px-12 bg-white text-slate-900">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 xl:gap-24 items-center">
-            {/* Left side: Typography & Stats */}
-            <div className="pr-4 xl:pr-8">
-              <span className="text-sm font-bold uppercase tracking-[0.2em] text-slate-400 mb-6 block">
-                Our Mission
-              </span>
-
-              <h2 className="text-4xl md:text-5xl xl:text-6xl font-extrabold mt-4 leading-[1.1] tracking-tight text-slate-900">
-                Building digital foundations for tomorrow.
-              </h2>
-
-              {/* Added: Professional Data Grid */}
-              <div className="grid grid-cols-2 gap-8 mt-12 pt-12 border-t border-slate-100">
-                <div>
-                  <span className="block text-4xl font-light text-blue-600 mb-2">
-                    98%
-                  </span>
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
-                    Client Retention
-                  </span>
-                </div>
-                <div>
-                  <span className="block text-4xl font-light text-blue-600 mb-2">
-                    250+
-                  </span>
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
-                    Projects Shipped
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right side: Copy & CTA */}
-            <div className="bg-slate-50 p-8 md:p-12 rounded-tr-[4rem] rounded-bl-[4rem]">
-              <p className="text-slate-600 text-lg md:text-xl leading-relaxed mb-10 font-light">
-                DigiSucceed helps businesses transcend their limitations. From
-                high-performance web architecture to data-driven marketing
-                campaigns, we provide the enterprise-grade tools required to
-                attract, engage, and scale.
-              </p>
-
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  to="/contact"
-                  className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-slate-900 text-white font-semibold hover:bg-blue-600 transition-all duration-300 min-w-[180px]">
-                  Start a Project
-                  <svg
-                    className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="square"
-                      strokeWidth="2"
-                      d="M5 12h14M12 5l7 7-7 7"
-                    />
-                  </svg>
-                </Link>
-
-                <Link
-                  to="/services"
-                  className="inline-flex items-center justify-center px-8 py-4 border border-slate-300 text-slate-700 font-semibold hover:border-slate-900 hover:text-slate-900 transition-all duration-300 min-w-[180px]">
-                  View Services
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <WhatIsNewSection />
-
-      {/* Final CTA - PREMIUM DARK */}
-      <section className="py-32 px-6 text-center bg-slate-950 border-t border-slate-800 relative overflow-hidden">
-        {/* Subtle background glow matrix */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNSkiLz48L3N2Zz4=')] [mask-image:linear-gradient(to_bottom,white,transparent)] pointer-events-none"></div>
-
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <h3 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight text-white">
-            Ready to scale?
-          </h3>
-
-          <p className="text-slate-400 text-xl mb-12 font-light max-w-2xl mx-auto">
-            Let’s build something powerful together. Engage our team to launch,
-            optimize, and dominate your digital market.
-          </p>
-
-          <Link
-            to="/contact"
-            className="group inline-flex items-center gap-3 px-10 py-5 bg-white text-slate-900 font-bold uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition-colors duration-300">
-            Contact Us Today
-            <svg
-              className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24">
-              <path strokeLinecap="square" strokeWidth="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </div>
-      </section>
+      <FAQSection />
     </div>
   );
 }
