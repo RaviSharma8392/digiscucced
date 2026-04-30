@@ -1,0 +1,167 @@
+{
+  "seo": {
+    "metaTitle": "Best Computer Institute in Haldwani | SI Succeed Computer Institute",
+    "metaDescription": "Join SI Succeed Computer Institute in Haldwani for job-oriented computer courses like ADCA, Tally, Web Design & Digital Marketing with practical training and certification.",
+    "keywords": [
+      "computer institute in haldwani",
+      "best computer institute uttarakhand",
+      "ADCA course haldwani",
+      "tally training institute",
+      "web designing course haldwani",
+      "digital marketing course uttarakhand"
+    ],
+    "ogImage": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200",
+    "canonical": "",
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "SI Succeed Computer Institute",
+      "address": "Haldwani, Uttarakhand, India"
+    }
+  },
+  "ui": {
+    "notices": [
+      "🎓 Admissions Open 2026–27 — Limited Seats Available",
+      "🚀 New Job-Oriented Computer Batch Starting May 2026",
+      "📜 Government-Recognized Computer Certificate Courses"
+    ]
+  },
+  "hero": {
+    "autoPlay": true,
+    "interval": 5000,
+    "banners": [
+      {
+        "image": "https://dspl.org.in/admin/uploads/slider/1749627287_window_slide-three.webp",
+        "title": "Best Computer Institute in Haldwani",
+        "description": "Learn job-oriented computer courses with practical training",
+        "cta": {
+          "label": "View Courses",
+          "link": "/courses"
+        }
+      },
+      {
+        "image": "https://dspl.org.in/admin/uploads/slider/1749623916_window_slide-one.webp",
+        "title": "Affordable Professional Training",
+        "description": "Start your IT career with industry-relevant skills",
+        "cta": {
+          "label": "Apply Now",
+          "link": "/contact"
+        }
+      }
+    ]
+  },
+  "about": {
+    "tag": "About Us",
+    "heading": "Top Computer Training Institute in Haldwani",
+    "description": "SI Succeed Computer Institute is a leading IT training center in Haldwani offering job-oriented courses designed to build real-world skills. Our focus is on practical learning, certification, and career growth.",
+    "highlights": [
+      "Government-recognized certification",
+      "Experienced faculty",
+      "100% practical training",
+      "Career guidance & placement support"
+    ],
+    "statsNumber": "1000+",
+    "statsLabel": "Students Trained",
+    "image1": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200",
+    "cta": {
+      "label": "Learn More",
+      "path": "/about"
+    }
+  },
+  "courses": [
+    {
+      "title": "ADCA",
+      "bullets": [
+        "MS Office + Internet",
+        "Tally & Accounting",
+        "Basic Programming"
+      ]
+    },
+    {
+      "title": "Web Development",
+      "bullets": [
+        "HTML, CSS, JavaScript",
+        "React & Projects",
+        "Portfolio Building"
+      ]
+    },
+    {
+      "title": "Digital Marketing",
+      "bullets": [
+        "SEO & Google Ads",
+        "Social Media Marketing",
+        "Real Campaign Projects"
+      ]
+    }
+  ],
+  "features": [
+    {
+      "title": "Practical Training",
+      "description": "Hands-on learning with real-world projects"
+    },
+    {
+      "title": "Expert Faculty",
+      "description": "Learn from industry-experienced trainers"
+    },
+    {
+      "title": "Job Assistance",
+      "description": "Placement support and career guidance"
+    }
+  ],
+  "library": {
+    "title": "Self Study Library",
+    "description": "A silent and disciplined environment for SSC, Banking, Railway & UPSC aspirants.",
+    "fee": "₹500/month",
+    "features": [
+      "Silent Study Hall",
+      "Clean Seating",
+      "Electricity & Fans",
+      "RO Drinking Water",
+      "Focused Environment"
+    ],
+    "cta": {
+      "label": "Join Library",
+      "link": "/library"
+    }
+  },
+  "cta": {
+    "heading": "Start Your Career with Professional Training",
+    "subtext": "Admissions open for 2026–27. Build job-ready skills today.",
+    "primaryBtn": {
+      "label": "Apply Now",
+      "path": "/admissions"
+    },
+    "secondaryBtn": {
+      "label": "Contact Us",
+      "path": "/contact"
+    }
+  },
+  "gallery": {
+    "title": "Our Institute Environment",
+    "subtitle": "Modern classrooms and practical labs",
+    "images": [
+      "img1.jpg",
+      "img2.jpg",
+      "img3.jpg",
+      "img4.jpg"
+    ],
+    "cta": {
+      "label": "View More",
+      "link": "/gallery"
+    }
+  },
+  "testimonials": [
+    {
+      "name": "Rahul Kumar",
+      "course": "ADCA",
+      "review": "Best computer institute in Haldwani. Trainers are very supportive and practical learning is excellent.",
+      "avatar": "https://via.placeholder.com/150?text=R"
+    },
+    {
+      "name": "Pooja Sharma",
+      "course": "Tally",
+      "review": "I got job-ready skills in accounting. Highly recommended institute.",
+      "avatar": "https://via.placeholder.com/150?text=P"
+    }
+  ]
+}

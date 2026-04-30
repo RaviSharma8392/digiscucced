@@ -49,6 +49,6 @@ export const PAGE_DATA = {
     "Career readiness workshops",
   ],
 
-  notices: NOTICES,
-  calendar: CALENDAR,
+  notices: [],
+  calendar: [],
 };

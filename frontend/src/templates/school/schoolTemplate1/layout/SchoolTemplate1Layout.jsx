@@ -3,13 +3,20 @@ import { useMemo } from "react";
 
 import { useBusinessLayout } from "../../../../layouts/useBusinessLayout";
 import BusinessPageHead from "../../../../layouts/BusinessPageHead";
-
-import SchoolNavbar from "../../../src/components/layout/SchoolNavbar";
 import SchoolFooter from "../components/ui/SchoolFooter";
 
 export default function SchoolTemplate1Layout({ business }) {
-  if (!business?.slug) {
-    return <div className="min-h-screen bg-[#f8fafc] animate-pulse" />;
+  // ─────────────────────────────
+  // HARD SAFETY CHECK
+  // ─────────────────────────────
+  if (!business || !business.slug) {
+    return (
+      <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center">
+        <div className="animate-pulse text-slate-400">
+          Loading business...
+        </div>
+      </div>
+    );
   }
 
   return <SchoolTemplate1Inner business={business} />;
@@ -20,30 +27,42 @@ function SchoolTemplate1Inner({ business }) {
 
   const {
     metaData = {},
-    nav = [],
-    navLinks = [],
+    nav,
+    navLinks,
     theme = {},
     faviconUrl,
   } = layoutData;
 
-  /* ───── Choose nav source ───── */
-  const navigation = nav.length ? nav : navLinks;
+  // ─────────────────────────────
+  // SAFE NAVIGATION RESOLUTION (FIXED)
+  // ─────────────────────────────
+  const navigation = useMemo(() => {
+    if (Array.isArray(nav) && nav.length > 0) return nav;
+    if (Array.isArray(navLinks) && navLinks.length > 0) return navLinks;
+    return [];
+  }, [nav, navLinks]);
 
-  /* ───── Normalize navigation for navbar ───── */
+  // ─────────────────────────────
+  // SAFE NAV NORMALIZATION
+  // ─────────────────────────────
   const normalizedNavLinks = useMemo(() => {
     return navigation.map((link) => ({
-      label: link.label,
-      path: link.path || "/",
-      subLinks: (link.subLinks || link.children || []).map((s) => ({
-        label: s.label,
-        path: s.path,
-        isExternal: s.isExternal || false,
-      })),
-      isExternal: link.isExternal || false,
+      label: link?.label || "",
+      path: link?.path || "/",
+      subLinks: Array.isArray(link?.subLinks || link?.children)
+        ? (link.subLinks || link.children).map((s) => ({
+          label: s?.label || "",
+          path: s?.path || "#",
+          isExternal: !!s?.isExternal,
+        }))
+        : [],
+      isExternal: !!link?.isExternal,
     }));
   }, [navigation]);
 
-  /* ───── CTA button ───── */
+  // ─────────────────────────────
+  // CTA SAFE
+  // ─────────────────────────────
   const cta = useMemo(() => {
     return {
       label: "Apply Now",
@@ -60,13 +79,15 @@ function SchoolTemplate1Inner({ business }) {
         slug={business.slug}
       />
 
-      <SchoolNavbar
+      {/* Navbar intentionally disabled */}
+      {/* You can enable later */}
+      {/* <SchoolNavbar
         navLinks={normalizedNavLinks}
         theme={theme}
         logoUrlDesk={metaData?.logoUrlDesk}
         logoUrlMobile={metaData?.logoUrlMobile}
         cta={cta}
-      />
+      /> */}
 
       <main className="flex-grow">
         <Outlet />

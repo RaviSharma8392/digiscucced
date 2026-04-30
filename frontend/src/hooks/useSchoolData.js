@@ -1,19 +1,26 @@
 /**
  * useSchoolData.js
- * 
- * Custom hook for fetching school data
- * Handles loading, error, and caching states
+ *
+ * Custom hook for loading a school's page data from /public/configs/{slug}/{page}.json
+ * via the core manifest loader (fetchPageData).
+ *
+ * Usage:
+ *   const { data, loading, error } = useSchoolData(slug, 'home');
  */
 
 import { useState, useEffect, useRef } from 'react';
-import schoolDataService from '../../services/api/schoolDataService.js';
-import logger from '../../services/error/errorHandler.js';
+import { fetchPageData } from '../../core/manifest/manifestLoader';
 
-export function useSchoolData(slug) {
+/**
+ * @param {string} slug     - Business slug
+ * @param {string} pageKey  - Page key: 'home' | 'contact' | 'courses' | etc.
+ * @returns {{ data: object|null, loading: boolean, error: string|null }}
+ */
+export function useSchoolData(slug, pageKey = 'home') {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const fetchedSlug = useRef(null);
+  const fetchedKey = useRef(null);
 
   useEffect(() => {
     if (!slug) {
@@ -22,42 +29,35 @@ export function useSchoolData(slug) {
       return;
     }
 
-    if (fetchedSlug.current === slug) {
+    const cacheKey = `${slug}:${pageKey}`;
+    if (fetchedKey.current === cacheKey) {
       setLoading(false);
       return;
     }
 
     let active = true;
     setLoading(true);
+    setError(null);
 
-    async function fetchData() {
-      try {
-        const schoolData = await schoolDataService.getSchoolData(slug);
-
+    fetchPageData(slug, pageKey)
+      .then((result) => {
         if (!active) return;
-
-        setData(schoolData);
-        setError(null);
-        fetchedSlug.current = slug;
-
-        logger.info(`School data loaded for slug: ${slug}`);
-      } catch (err) {
+        setData(result);
+        fetchedKey.current = cacheKey;
+      })
+      .catch((err) => {
         if (!active) return;
-
-        logger.error(`Failed to load school data for slug: ${slug}`, err);
-        setError(err.message || 'Failed to load school data');
-        setData(null);
-      } finally {
+        console.error(`[useSchoolData] Failed to load "${pageKey}" for "${slug}":`, err);
+        setError(err.message || 'Failed to load data');
+      })
+      .finally(() => {
         if (active) setLoading(false);
-      }
-    }
-
-    fetchData();
+      });
 
     return () => {
       active = false;
     };
-  }, [slug]);
+  }, [slug, pageKey]);
 
   return { data, loading, error };
 }

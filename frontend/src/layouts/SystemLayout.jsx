@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
-import FloatingContactBtn from "../components/btn/FloatingContactBtn";
 import Navbar from "../features/home/components/bars/Navbar";
-import Footer from "../components/Footer";
+import Footer from "../features/Footer";
 import Topbar from "../features/home/components/bars/Topbar";
 
 export default function SystemLayout() {
@@ -12,7 +11,6 @@ export default function SystemLayout() {
 
       <Outlet />
 
-      <FloatingContactBtn />
       <Footer />
     </>
   );

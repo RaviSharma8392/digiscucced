@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import SchoolTemplate1Layout from "../layout/SchoolTemplate1Layout";
 
-const pages = import.meta.glob("../templates/schoolTemplate1/pages/*.jsx", {
+const pages = import.meta.glob("../pages/*.jsx", {
   eager: true,
 });
 
@@ -12,9 +12,11 @@ export default function DynamicRoutes({ business }) {
   const routes = Object.entries(pages).map(([file, module]) => {
     const name = file.split("/").pop().replace(".jsx", "");
 
-    const path = name === "home" ? "" : name;
+    // Automatically resolve any 'Home' named component to the index route
+    const path = name.toLowerCase().includes("home") ? "" : name.toLowerCase();
 
     const Component = module.default;
+    if (!Component) return null;
 
     return (
       <Route

@@ -1,48 +1,84 @@
 import React, { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom"; // ✅ FIXED
 import SchoolTemplate1Layout from "../layout/SchoolTemplate1Layout.jsx";
 
 /* Lazy Pages */
-const SchoolTemplate1Home = lazy(
-  () => import("../pages/SchoolTemplate1Home.jsx"),
+const SchoolTemplate1Home = lazy(() =>
+  import("../pages/SchoolTemplate1Home.jsx")
 );
 
-const AdmissionsPage = lazy(() => import("../pages/AdmissionsPage.jsx"));
+const AdmissionsPage = lazy(() =>
+  import("../pages/AdmissionsPage.jsx")
+);
 
-const SchoolTemplate1AboutPage = lazy(() => import("../pages/About.jsx"));
+const SchoolTemplate1AboutPage = lazy(() =>
+  import("../pages/About.jsx")
+);
 
-const ContactPage = lazy(
-  () => import("../pages/SchoolTemplate1ContactPage.jsx"),
+const ContactPage = lazy(() =>
+  import("../pages/SchoolTemplate1ContactPage.jsx")
 );
 
 export default function SchoolTemplate1Routes({ business }) {
-  if (!business?.slug) return <div className="min-h-screen animate-pulse" />;
+  // ─────────────────────────────
+  // SAFE BUSINESS CHECK
+  // ─────────────────────────────
+  if (!business || typeof business !== "object" || !business.slug) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-gray-400 animate-pulse">
+        Loading business...
+      </div>
+    );
+  }
 
   return (
-    <Suspense fallback={<PageLoader />}>
-      <Routes>
-        <Route element={<SchoolTemplate1Layout business={business} />}>
-          {/* Home */}
-          <Route index element={<SchoolTemplate1Home business={business} />} />
+    <Routes>
+      <Route element={<SchoolTemplate1Layout business={business} />}>
 
-          {/* Pages */}
-          <Route
-            path="admissions"
-            element={<AdmissionsPage business={business} />}
-          />
+        {/* Home */}
+        <Route
+          index
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <SchoolTemplate1Home business={business} />
+            </Suspense>
+          }
+        />
 
-          <Route path="contact" element={<ContactPage business={business} />} />
+        {/* Admissions */}
+        <Route
+          path="admissions"
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <AdmissionsPage business={business} />
+            </Suspense>
+          }
+        />
 
-          <Route
-            path="about"
-            element={<SchoolTemplate1AboutPage business={business} />}
-          />
+        {/* Contact */}
+        <Route
+          path="contact"
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <ContactPage business={business} />
+            </Suspense>
+          }
+        />
 
-          {/* 404 */}
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </Suspense>
+        {/* About */}
+        <Route
+          path="about"
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <SchoolTemplate1AboutPage business={business} />
+            </Suspense>
+          }
+        />
+
+        {/* 404 */}
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 

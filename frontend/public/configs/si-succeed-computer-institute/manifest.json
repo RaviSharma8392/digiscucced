@@ -1,0 +1,157 @@
+{
+  "slug": "si-succeed-computer-institute",
+  "name": "SI Succeed Computer Institute",
+  "template": "instituteTemplate1",
+  "brand": {
+    "name": "SI Succeed Computer Institute",
+    "tagline": "Professional Computer & IT Training",
+    "logo": "https://f005.backblazeb2.com/file/bmpcdn90/academy/36651/Si--7-.jpg",
+    "favicon": "https://f005.backblazeb2.com/file/bmpcdn90/academy/36651/Si--7-.jpg"
+  },
+  "contact": {
+    "phone": "+91-0000000000",
+    "email": "sisucceedinstitute@gmail.com",
+    "address": "Haldwani, Uttarakhand",
+    "whatsapp": "+91-0000000000"
+  },
+  "seo": {
+    "title": "SI Succeed Computer Institute | Best Computer Training in Haldwani, Uttarakhand",
+    "description": "Join SI Succeed Computer Institute in Haldwani for professional computer courses like ADCA, Tally, MS Office, Web Designing & Digital Marketing. Learn job-ready IT skills with practical training.",
+    "keywords": "computer institute haldwani, best computer courses haldwani, ADCA course uttarakhand, tally training haldwani, ms office course, web designing institute, digital marketing course haldwani, IT training uttarakhand",
+    "ogImage": "/configs/si-succeed-computer-institute/logo.png",
+    "themeColor": "#003366",
+    "schemaType": "EducationalOrganization"
+  },
+  "localSEO": {
+    "city": "Haldwani",
+    "state": "Uttarakhand",
+    "country": "India",
+    "serviceArea": [
+      "Haldwani",
+      "Nainital",
+      "Kathgodam"
+    ],
+    "businessType": "Computer Training Institute"
+  },
+  "nav": {
+    "topLinks": [
+      {
+        "label": "About Us",
+        "path": "/about"
+      },
+      {
+        "label": "Success Stories",
+        "path": "/success-stories"
+      },
+      {
+        "label": "FAQ",
+        "path": "/faq"
+      },
+      {
+        "label": "Contact",
+        "path": "/contact"
+      }
+    ],
+    "mainLinks": [
+      {
+        "label": "Home",
+        "path": "/si-succeed-computer-institute"
+      },
+      {
+        "label": "Courses",
+        "path": "/si-succeed-computer-institute/courses"
+      },
+      {
+        "label": "Contact",
+        "path": "/si-succeed-computer-institute/contact"
+      },
+      {
+        "label": "About-Us",
+        "path": "/si-succeed-computer-institute/about"
+      },
+      {
+        "label": "Library",
+        "path": "/si-succeed-computer-institute/library"
+      }
+    ],
+    "actionButton": {
+      "label": "Online Library Catalogue",
+      "url": "https://catalogue.example.com"
+    },
+    "links": [
+      {
+        "label": "Home",
+        "path": "/"
+      },
+      {
+        "label": "About",
+        "path": "/about"
+      },
+      {
+        "label": "Courses",
+        "path": "/courses",
+        "subLinks": [
+          {
+            "label": "ADCA",
+            "path": "/courses/adca"
+          },
+          {
+            "label": "Tally",
+            "path": "/courses/tally"
+          },
+          {
+            "label": "MS Office",
+            "path": "/courses/ms-office"
+          },
+          {
+            "label": "Web Design",
+            "path": "/courses/web-design"
+          },
+          {
+            "label": "Digital Marketing",
+            "path": "/courses/digital-marketing"
+          }
+        ]
+      },
+      {
+        "label": "Gallery",
+        "path": "/gallery"
+      },
+      {
+        "label": "Contact",
+        "path": "/contact"
+      }
+    ]
+  },
+  "pages": {
+    "home": "home",
+    "contact": "contact",
+    "courses": "courses"
+  },
+  "theme": {
+    "primary": "#083262",
+    "accent": "#f26522",
+    "background": "#ffffff",
+    "text": "#1f2937"
+  },
+  "topBar": {
+    "phone": "+91-0000000000",
+    "email": "sisucceedinstitute@gmail.com",
+    "address": "Haldwani, Uttarakhand"
+  },
+  "features": {
+    "admissions": true,
+    "gallery": true,
+    "contact": true,
+    "courses": true
+  },
+  "socials": {
+    "facebook": "https://facebook.com",
+    "twitter": "https://twitter.com",
+    "instagram": "https://instagram.com"
+  },
+  "footer": {
+    "tagline": "Professional Computer & IT Training",
+    "links": []
+  }
+}

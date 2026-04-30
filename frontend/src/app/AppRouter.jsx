@@ -1,48 +1,67 @@
+/**
+ * AppRouter.jsx
+ *
+ * Platform-level router.
+ * - / → CMS homepage
+ * - /services → platform services
+ * - /who-we-are → about page
+ * - /:businessSlug/* → tenant system
+ */
+
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import SystemLayout from "../layouts/SystemLayout";
-import AboutPage from "./system/pages/AboutPage";
-import ContactPage from "./system/pages/ContactPage";
-import GenZContactPage from "./system/pages/ContactPage";
-import Home from "../system/pages/Home";
 
-// --- Lazy-loaded pages ---
+import SystemLayout from "../layouts/SystemLayout";
+import LandingPage from "./system/pages/LandingPage";
+
+// ── Platform pages (lazy loaded) ─────────────────────────────
 const HomePage = lazy(() => import("../system/pages/HomePages"));
 const ServicesPage = lazy(() => import("../system/pages/ServicesPage"));
-const BusinessRouterResolver = lazy(() => import("./BusinessRouterResolver"));
-const HomeStayHomePage = lazy(
-  () =>
-    import("../templates/homestay/homestayTemplate1/pages/HomeStayHomePage"),
-);
-const Rooms = lazy(
-  () => import("../templates/homestay/homestayTemplate1/pages/Rooms"),
+const AboutPage = lazy(() => import("../system/pages/Home")); // rename if possible
+
+// ── Tenant resolver ──────────────────────────────────────────
+const BusinessRouterResolver = lazy(() =>
+  import("./BusinessRouterResolver")
 );
 
-// --- Fallback component for loading ---
-const Loader = () => (
-  <div className="flex items-center justify-center h-screen text-lg font-medium">
-    Loading...
-  </div>
-);
+// ── Loading fallback ─────────────────────────────────────────
+function PlatformLoader() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        fontFamily: "Inter, system-ui, sans-serif",
+        fontSize: "1rem",
+        color: "#6b7280",
+      }}
+    >
+      Loading…
+    </div>
+  );
+}
 
 export default function AppRouter() {
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={<PlatformLoader />}>
       <Routes>
-        {/* Business websites */}
-        <Route path="/:businessSlug/*" element={<BusinessRouterResolver />} />
-
-        {/* Platform website */}
+        {/* ── PLATFORM ROUTES ───────────────────────────── */}
         <Route path="/" element={<SystemLayout />}>
           <Route index element={<HomePage />} />
+          <Route path="solutions" element={<LandingPage />} />
+
           <Route path="services" element={<ServicesPage />} />
         </Route>
-        <Route path="/who-we-are" element={<Home />} />
 
-        {/* Homestay template */}
-        <Route path="homestay" element={<HomeStayHomePage />} />
-        <Route path="rooms" element={<Rooms />} />
-        <Route path="contact-us" element={<ContactPage />} />
+        <Route path="/who-we-are" element={<AboutPage />} />
+
+        {/* ── TENANT ROUTES (CMS SITES) ─────────────────── */}
+        <Route
+          path="/:businessSlug/*"
+          element={<BusinessRouterResolver />}
+        />
       </Routes>
     </Suspense>
   );
