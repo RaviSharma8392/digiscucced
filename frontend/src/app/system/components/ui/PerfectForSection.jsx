@@ -1,7 +1,7 @@
 import React from "react";
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
-import LeftFlower from "../../../../assets/icons/LeftFLower.svg";
-import RightFlower from "../../../../assets/icons/RightFlower.svg";
+// import LeftFlower from "../../../../assets/icons/LeftFLower.svg";
+// import RightFlower from "../../../../assets/icons/RightFlower.svg";
 
 /*
   SEO NOTES — BUSINESS TYPES
@@ -82,22 +82,22 @@ export default function PerfectForSection() {
                     className="flex flex-wrap items-center justify-center gap-8 text-sm text-slate-700 mb-10"
                 >
                     <div className="flex items-center gap-2">
-                        <img
+                        {/* <img
                             src={LeftFlower}
                             alt=""
                             aria-hidden="true"
                             className="w-5 h-5"
-                        />
+                        /> */}
                         {/* <strong> gives "5,000+ local shops" semantic weight */}
                         <span className="font-medium">
                             Trusted by <strong>5,000+ local businesses</strong> across India
                         </span>
-                        <img
+                        {/* <img
                             src={RightFlower}
                             alt=""
                             aria-hidden="true"
                             className="w-5 h-5"
-                        />
+                        /> */}
                     </div>
 
                     <div className="flex items-center gap-2">
