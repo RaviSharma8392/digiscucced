@@ -1,6 +1,6 @@
 import React from "react";
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
-import LeftFlower from "../../../../assets/icons/LeftFlower.svg";
+import LeftFlower from "../../../../assets/icons/LeftFLower.svg";
 import RightFlower from "../../../../assets/icons/RightFlower.svg";
 
 /*
